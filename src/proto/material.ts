@@ -5,7 +5,7 @@
 // source: src/proto/material.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire';
 import {
   type CallOptions,
   ChannelCredentials,
@@ -17,12 +17,11 @@ import {
   Metadata,
   type ServiceError,
   type UntypedServiceImplementation,
-} from "@grpc/grpc-js";
+} from '@grpc/grpc-js';
 
-export const protobufPackage = "material";
+export const protobufPackage = 'material';
 
-export interface Empty {
-}
+export interface Empty {}
 
 export interface SourceRequest {
   color: number;
@@ -47,7 +46,8 @@ export const Empty: MessageFns<Empty> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Empty {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEmpty();
     while (reader.pos < end) {
@@ -85,7 +85,10 @@ function createBaseSourceRequest(): SourceRequest {
 }
 
 export const SourceRequest: MessageFns<SourceRequest> = {
-  encode(message: SourceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SourceRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.color !== 0) {
       writer.uint32(8).int64(message.color);
     }
@@ -93,7 +96,8 @@ export const SourceRequest: MessageFns<SourceRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SourceRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceRequest();
     while (reader.pos < end) {
@@ -128,10 +132,14 @@ export const SourceRequest: MessageFns<SourceRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SourceRequest>, I>>(base?: I): SourceRequest {
+  create<I extends Exact<DeepPartial<SourceRequest>, I>>(
+    base?: I,
+  ): SourceRequest {
     return SourceRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SourceRequest>, I>>(object: I): SourceRequest {
+  fromPartial<I extends Exact<DeepPartial<SourceRequest>, I>>(
+    object: I,
+  ): SourceRequest {
     const message = createBaseSourceRequest();
     message.color = object.color ?? 0;
     return message;
@@ -143,7 +151,10 @@ function createBaseImageRequest(): ImageRequest {
 }
 
 export const ImageRequest: MessageFns<ImageRequest> = {
-  encode(message: ImageRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ImageRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.buffer.length !== 0) {
       writer.uint32(10).bytes(message.buffer);
     }
@@ -151,7 +162,8 @@ export const ImageRequest: MessageFns<ImageRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ImageRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseImageRequest();
     while (reader.pos < end) {
@@ -175,7 +187,11 @@ export const ImageRequest: MessageFns<ImageRequest> = {
   },
 
   fromJSON(object: any): ImageRequest {
-    return { buffer: isSet(object.buffer) ? bytesFromBase64(object.buffer) : new Uint8Array(0) };
+    return {
+      buffer: isSet(object.buffer)
+        ? bytesFromBase64(object.buffer)
+        : new Uint8Array(0),
+    };
   },
 
   toJSON(message: ImageRequest): unknown {
@@ -186,10 +202,14 @@ export const ImageRequest: MessageFns<ImageRequest> = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ImageRequest>, I>>(base?: I): ImageRequest {
+  create<I extends Exact<DeepPartial<ImageRequest>, I>>(
+    base?: I,
+  ): ImageRequest {
     return ImageRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ImageRequest>, I>>(object: I): ImageRequest {
+  fromPartial<I extends Exact<DeepPartial<ImageRequest>, I>>(
+    object: I,
+  ): ImageRequest {
     const message = createBaseImageRequest();
     message.buffer = object.buffer ?? new Uint8Array(0);
     return message;
@@ -197,22 +217,26 @@ export const ImageRequest: MessageFns<ImageRequest> = {
 };
 
 function createBaseThemeReply(): ThemeReply {
-  return { source: 0, style: "" };
+  return { source: 0, style: '' };
 }
 
 export const ThemeReply: MessageFns<ThemeReply> = {
-  encode(message: ThemeReply, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ThemeReply,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.source !== 0) {
       writer.uint32(8).int64(message.source);
     }
-    if (message.style !== "") {
+    if (message.style !== '') {
       writer.uint32(18).string(message.style);
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ThemeReply {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseThemeReply();
     while (reader.pos < end) {
@@ -246,7 +270,7 @@ export const ThemeReply: MessageFns<ThemeReply> = {
   fromJSON(object: any): ThemeReply {
     return {
       source: isSet(object.source) ? globalThis.Number(object.source) : 0,
-      style: isSet(object.style) ? globalThis.String(object.style) : "",
+      style: isSet(object.style) ? globalThis.String(object.style) : '',
     };
   },
 
@@ -255,7 +279,7 @@ export const ThemeReply: MessageFns<ThemeReply> = {
     if (message.source !== 0) {
       obj.source = Math.round(message.source);
     }
-    if (message.style !== "") {
+    if (message.style !== '') {
       obj.style = message.style;
     }
     return obj;
@@ -264,10 +288,12 @@ export const ThemeReply: MessageFns<ThemeReply> = {
   create<I extends Exact<DeepPartial<ThemeReply>, I>>(base?: I): ThemeReply {
     return ThemeReply.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ThemeReply>, I>>(object: I): ThemeReply {
+  fromPartial<I extends Exact<DeepPartial<ThemeReply>, I>>(
+    object: I,
+  ): ThemeReply {
     const message = createBaseThemeReply();
     message.source = object.source ?? 0;
-    message.style = object.style ?? "";
+    message.style = object.style ?? '';
     return message;
   },
 };
@@ -275,30 +301,36 @@ export const ThemeReply: MessageFns<ThemeReply> = {
 export type MaterialService = typeof MaterialService;
 export const MaterialService = {
   test: {
-    path: "/material.Material/Test",
+    path: '/material.Material/Test',
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: Empty) => Buffer.from(Empty.encode(value).finish()),
+    requestSerialize: (value: Empty) =>
+      Buffer.from(Empty.encode(value).finish()),
     requestDeserialize: (value: Buffer) => Empty.decode(value),
-    responseSerialize: (value: ThemeReply) => Buffer.from(ThemeReply.encode(value).finish()),
+    responseSerialize: (value: ThemeReply) =>
+      Buffer.from(ThemeReply.encode(value).finish()),
     responseDeserialize: (value: Buffer) => ThemeReply.decode(value),
   },
   generateFromSourceColor: {
-    path: "/material.Material/GenerateFromSourceColor",
+    path: '/material.Material/GenerateFromSourceColor',
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: SourceRequest) => Buffer.from(SourceRequest.encode(value).finish()),
+    requestSerialize: (value: SourceRequest) =>
+      Buffer.from(SourceRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer) => SourceRequest.decode(value),
-    responseSerialize: (value: ThemeReply) => Buffer.from(ThemeReply.encode(value).finish()),
+    responseSerialize: (value: ThemeReply) =>
+      Buffer.from(ThemeReply.encode(value).finish()),
     responseDeserialize: (value: Buffer) => ThemeReply.decode(value),
   },
   generateFromImageBuffer: {
-    path: "/material.Material/GenerateFromImageBuffer",
+    path: '/material.Material/GenerateFromImageBuffer',
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: ImageRequest) => Buffer.from(ImageRequest.encode(value).finish()),
+    requestSerialize: (value: ImageRequest) =>
+      Buffer.from(ImageRequest.encode(value).finish()),
     requestDeserialize: (value: Buffer) => ImageRequest.decode(value),
-    responseSerialize: (value: ThemeReply) => Buffer.from(ThemeReply.encode(value).finish()),
+    responseSerialize: (value: ThemeReply) =>
+      Buffer.from(ThemeReply.encode(value).finish()),
     responseDeserialize: (value: Buffer) => ThemeReply.decode(value),
   },
 } as const;
@@ -310,7 +342,10 @@ export interface MaterialServer extends UntypedServiceImplementation {
 }
 
 export interface MaterialClient extends Client {
-  test(request: Empty, callback: (error: ServiceError | null, response: ThemeReply) => void): ClientUnaryCall;
+  test(
+    request: Empty,
+    callback: (error: ServiceError | null, response: ThemeReply) => void,
+  ): ClientUnaryCall;
   test(
     request: Empty,
     metadata: Metadata,
@@ -354,15 +389,22 @@ export interface MaterialClient extends Client {
   ): ClientUnaryCall;
 }
 
-export const MaterialClient = makeGenericClientConstructor(MaterialService, "material.Material") as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): MaterialClient;
+export const MaterialClient = makeGenericClientConstructor(
+  MaterialService,
+  'material.Material',
+) as unknown as {
+  new (
+    address: string,
+    credentials: ChannelCredentials,
+    options?: Partial<ClientOptions>,
+  ): MaterialClient;
   service: typeof MaterialService;
   serviceName: string;
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
   if ((globalThis as any).Buffer) {
-    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -375,35 +417,49 @@ function bytesFromBase64(b64: string): Uint8Array {
 
 function base64FromBytes(arr: Uint8Array): string {
   if ((globalThis as any).Buffer) {
-    return globalThis.Buffer.from(arr).toString("base64");
+    return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
       bin.push(globalThis.String.fromCharCode(byte));
     });
-    return globalThis.btoa(bin.join(""));
+    return globalThis.btoa(bin.join(''));
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+    ? globalThis.Array<DeepPartial<U>>
+    : T extends ReadonlyArray<infer U>
+      ? ReadonlyArray<DeepPartial<U>>
+      : T extends {}
+        ? { [K in keyof T]?: DeepPartial<T[K]> }
+        : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
   const num = globalThis.Number(int64.toString());
   if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
   }
   if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+    throw new globalThis.Error('Value is smaller than Number.MIN_SAFE_INTEGER');
   }
   return num;
 }

@@ -12,7 +12,7 @@
     "check:prettier": "prettier --check \"{src,test}/**/*.ts\"",
     "fix:lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "check:lint": "eslint \"{src,test}/**/*.ts\"",
-    "format": "yarn format:prettier && yarn format:lint",
+    "format": "yarn format:prettier && yarn fix:lint",
     "check": "yarn check:prettier && yarn check:lint",
     "test": "yarn jest -c jest.config.mjs"
   },

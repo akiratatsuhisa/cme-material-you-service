@@ -1,6 +1,6 @@
-# Celadon-meadow Material You Service
+# Celadon Meadow Material You Service
 
-This application is a gRPC service that generates CSS styles from images or a source color, suitable for the Vuetify framework.
+This microservice generates CSS styles from images or source colors, designed in accordance with Google's Material You principles for a modern, adaptive user experience tailored for the Vuetify framework.
 
 ## Requirements
 
@@ -12,7 +12,7 @@ This application is a gRPC service that generates CSS styles from images or a so
 ### 1. **Clone the Repository**
 
 ```bash
-git clone https://link-to-your-repo.git
+git clone https://github.com/akiratatsuhisa/cme-material-you-service.git
 cd application-name
 ```
 
@@ -48,4 +48,4 @@ yarn start
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
