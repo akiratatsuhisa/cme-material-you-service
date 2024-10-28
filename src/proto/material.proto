@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package material;
+
+service Material {
+    rpc Test (Empty) returns (ThemeReply) {}
+    rpc GenerateFromSourceColor (SourceRequest) returns (ThemeReply) {}
+    rpc GenerateFromImageBuffer (ImageRequest) returns (ThemeReply) {}
+}
+
+message Empty {    
+}
+
+message SourceRequest {
+    int64 color = 1;
+}
+
+message ImageRequest {
+    bytes buffer = 1;
+}
+
+message ThemeReply {
+    int64 source = 1;
+    string style = 2;
+}

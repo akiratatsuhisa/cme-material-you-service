@@ -1,0 +1,56 @@
+name: 'Test, Build & Deploy'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run check eslint and prettier
+        run: yarn check
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run build
+        run: yarn build
+
+  deploy:
+    needs:
+      - check
+      - build
+    runs-on: ubuntu-latest
+    if: "startsWith(github.event.head_commit.message, '[DEPLOY]')"
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4

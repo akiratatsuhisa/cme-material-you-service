@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "name": "cme-material-you-service",
+  "main": "node dist/main.js",
+  "type": "module",
+  "packageManager": "yarn@4.5.1",
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "tsc",
+    "generate:proto:server": "protoc --plugin=protoc-gen-ts_proto=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" --ts_proto_opt=outputServices=grpc-js --ts_proto_out=. ./src/proto/*.proto",
+    "format:prettier": "prettier --write \"{src,test}/**/*.ts\"",
+    "check:prettier": "prettier --check \"{src,test}/**/*.ts\"",
+    "fix:lint": "eslint \"{src,test}/**/*.ts\" --fix",
+    "check:lint": "eslint \"{src,test}/**/*.ts\"",
+    "format": "yarn format:prettier && yarn format:lint",
+    "check": "yarn check:prettier && yarn check:lint",
+    "test": "yarn jest -c jest.config.mjs"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.2",
+    "@grpc/proto-loader": "^0.7.13",
+    "@material/material-color-utilities": "^0.3.0",
+    "canvas": "^3.0.0-rc2",
+    "dotenv": "^16.4.5",
+    "ts-proto": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "jest": "^29.5.0",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.1.0",
+    "ts-jest-resolver": "^2.0.1",
+    "typescript": "^5.1.3"
+  }
+}
