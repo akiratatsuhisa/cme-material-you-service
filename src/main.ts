@@ -6,14 +6,13 @@ import { Status } from '@grpc/grpc-js/build/src/constants.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { COLOR_VARIABLES } from './constants.js';
 import {
   themeFromImage,
   themeFromSourceColor,
 } from './material-color-utilities.js';
 import { MaterialServer, MaterialService } from './proto/material.js';
 import { convertSchemesToCss } from './utils.js';
-
-const PORT = process.env.PORT;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,13 +37,18 @@ const implementation: MaterialServer = {
       });
     }
   },
+
   async generateFromSourceColor(call, callback) {
     const source = call.request.color;
 
-    if (source < 0 || source > 4294967295) {
+    if (source < COLOR_VARIABLES.MIN_HEX || source > COLOR_VARIABLES.MAX_HEX) {
+      const message = `The source color (${source}) must be a positive integer greater than ${COLOR_VARIABLES.MIN_HEX} and less than or equal to ${COLOR_VARIABLES.MAX_HEX}.`;
+
+      console.warn(message);
+
       callback({
         code: Status.INVALID_ARGUMENT,
-        message: `The source color (${source}) must be a positive integer greater than 0 and less than or equal to 4294967295.`,
+        message,
       });
       return;
     }
@@ -65,6 +69,7 @@ const implementation: MaterialServer = {
       });
     }
   },
+
   async generateFromImageBuffer(call, callback) {
     const buffer = Buffer.from(call.request.buffer);
 
@@ -90,10 +95,10 @@ export async function main() {
   const server = new grpc.Server();
   server.addService(MaterialService, implementation);
 
-  const { promise, resolve, reject } = Promise.withResolvers();
+  const { promise, resolve, reject } = Promise.withResolvers<void>();
 
   server.bindAsync(
-    `0.0.0.0:${PORT}`,
+    `0.0.0.0:${process.env.PORT}`,
     grpc.ServerCredentials.createInsecure(),
     (error, port) => {
       if (error) {
@@ -101,12 +106,12 @@ export async function main() {
         return;
       }
 
-      console.log(`The service is running on gRPC at localhost:${port}`);
+      console.info(`The service is running on gRPC at localhost:${port}`);
       resolve(undefined);
     },
   );
 
-  await promise;
+  return promise;
 }
 
 main();

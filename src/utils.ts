@@ -1,6 +1,6 @@
 import { Scheme } from '@material/material-color-utilities';
 
-import { MATERIAL } from './constants.js';
+import { COLOR_VARIABLES, MATERIAL } from './constants.js';
 
 /**
  * Converts a hexadecimal color value to its corresponding RGB representation.
@@ -10,9 +10,9 @@ import { MATERIAL } from './constants.js';
  * @returns {[number, number, number]} An array representing the resulting RGB color: [red, green, blue]
  */
 export function hexToRgb(source: number): [number, number, number] {
-  const red = (source >> 16) & 255;
-  const green = (source >> 8) & 255;
-  const blue = source & 255;
+  const red = (source >> 16) & COLOR_VARIABLES.MAX_RGB;
+  const green = (source >> 8) & COLOR_VARIABLES.MAX_RGB;
+  const blue = source & COLOR_VARIABLES.MAX_RGB;
 
   return [red, green, blue];
 }
@@ -28,10 +28,12 @@ export function rgbaToRgb(
   rgba: [number, number, number, number],
   background: [number, number, number] = [255, 255, 255],
 ): [number, number, number] {
+  const alpha = rgba[3];
+
   return [
-    Math.round((1 - rgba[3]) * background[0] + rgba[3] * rgba[0]),
-    Math.round((1 - rgba[3]) * background[1] + rgba[3] * rgba[1]),
-    Math.round((1 - rgba[3]) * background[2] + rgba[3] * rgba[2]),
+    Math.round((1 - alpha) * background[0] + alpha * rgba[0]),
+    Math.round((1 - alpha) * background[1] + alpha * rgba[1]),
+    Math.round((1 - alpha) * background[2] + alpha * rgba[2]),
   ];
 }
 
@@ -65,6 +67,7 @@ export function convertSchemesToCss(
     // add surface container
     const primaryColor = hexToRgb(fields.primary);
     const surfaceColor = hexToRgb(fields.surface);
+
     for (const [key, value] of Object.entries(
       MATERIAL.SURFACE_CONTAINER_THRESHOLDS,
     )) {

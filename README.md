@@ -13,12 +13,15 @@ This microservice generates CSS styles from images or source colors, designed in
 
 ```bash
 git clone https://github.com/akiratatsuhisa/cme-material-you-service.git
-cd application-name
 ```
 
 ### 2. **Install Dependencies**
 
 Use Yarn to install the necessary packages:
+
+```bash
+yarn
+```
 
 ### 3. **Create a .env file**
 

@@ -23,6 +23,7 @@ export async function sourceColorFromImage(src: string | Buffer) {
   const imageBytes = await new Promise<Uint8ClampedArray>((resolve, reject) => {
     const canvas = createCanvas(image.width, image.height);
     const context = canvas.getContext('2d');
+
     if (!context) {
       reject(new Error('Could not get canvas context'));
       return;
@@ -32,17 +33,23 @@ export async function sourceColorFromImage(src: string | Buffer) {
       canvas.width = image.width;
       canvas.height = image.height;
       context.drawImage(image, 0, 0);
+
       let rect = [0, 0, image.width, image.height];
+
       const area = (image as any)?.dataset?.['area'];
+
       if (area && /^\d+(\s*,\s*\d+){3}$/.test(area)) {
         rect = area.split(/\s*,\s*/).map((s: any) => {
           // tslint:disable-next-line:ban
           return parseInt(s, 10);
         });
       }
+
       const [sx, sy, sw, sh] = rect;
+
       resolve(context.getImageData(sx, sy, sw, sh).data);
     };
+
     if (image.complete) {
       callback();
     } else {
