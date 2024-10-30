@@ -29,7 +29,7 @@ In the root directory of the project, create a `.env` file and add the following
 
 | Key  | Type   | Description                        | Example |
 | ---- | ------ | ---------------------------------- | ------- |
-| PORT | Number | The port on which the server runs. | 6050    |
+| PORT | Number | The port on which the server runs. | 49300   |
 
 ## Usage
 

@@ -8,6 +8,7 @@
     "start": "node dist/main.js",
     "build": "tsc",
     "generate:proto:server": "protoc --plugin=protoc-gen-ts_proto=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" --ts_proto_opt=outputServices=grpc-js --ts_proto_out=. ./src/proto/*.proto",
+    "generate:proto:client": "protoc --plugin=protoc-gen-ts_proto=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" --ts_proto_opt=nestJs=true --ts_proto_out=../cme-social-media-server/gateway/ ./src/proto/*.proto",
     "format:prettier": "prettier --write \"{src,test}/**/*.ts\"",
     "check:prettier": "prettier --check \"{src,test}/**/*.ts\"",
     "fix:lint": "eslint \"{src,test}/**/*.ts\" --fix",

@@ -6,7 +6,7 @@ import { MaterialClient, ThemeReply } from '../src/proto/material.js';
 
 describe('Main cases', () => {
   const client = new MaterialClient(
-    '0.0.0.0:6050',
+    '0.0.0.0:49300',
     ChannelCredentials.createInsecure(),
   );
 
